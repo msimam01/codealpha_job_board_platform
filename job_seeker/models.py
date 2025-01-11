@@ -10,7 +10,8 @@ class Application(models.Model):
     application_date = models.DateField(auto_now_add=True)
     
     def __str__(self):
-        return self.job, self.user
+        return f"{self.user} apply for {self.job}"
+    
     
     
     

@@ -10,6 +10,6 @@ class Job(models.Model):
     deadline = models.DateField()
     
     def __str__(self):
-        return self.title, self.description
+        return f"{self.title} {self.description}"
     
 

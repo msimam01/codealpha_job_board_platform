@@ -1,0 +1,60 @@
+{% extends 'account/base.html' %}
+{% block content %}
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-lg-4"></div>
+      <div class="col-lg-4">
+        <div class="card mt-5">
+          <div class="card-header bg-white p-3">
+            <h3 class="text-center">Welcome Back!</h3>
+          </div>
+          {% if form.errors %}
+            <div class="error-summary alert alert-danger">
+              <p>Please fix the following errors:</p>
+              <ul>
+                {% for field, errors in form.errors.items %}
+                  {% for error in errors %}
+                    <li>{{ error }}</li>
+                  {% endfor %}
+                {% endfor %}
+              </ul>
+            </div>
+          {% endif %}
+          {% comment %} {% if messages %}
+            <div class="messages">
+              {% for message in messages %}
+                <div class="message alert alert-{{ message.tags }}">{{ message }}</div>
+              {% endfor %}
+            </div>
+          {% endif %} {% endcomment %}
+          <div class="card-body">
+            <form action="{% url "account_login" %}" method="post" id="contactForm" novalidate="novalidate">
+                {% csrf_token %}
+              <div class="row mt-3">
+                <div class="col-12">
+                  <div class="form-group">
+                    <input class="form-control" name="login" id="username_email" type="text" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter Email or Username'" placeholder="Enter Email or Username" />
+                  </div>
+                </div>
+              </div>
+              <div class="row mt-2">
+                <div class="col-12">
+                  <div class="form-group">
+                    <input class="form-control" name="password" id="subject" type="password" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter Password'" placeholder="Enter Password" />
+                  </div>
+                </div>
+              </div>
+              <div class="form-group mt-3">
+                <button type="submit" class="btn btn-block btn-danger">Send</button>
+              </div>
+              <p>
+                Don't have an account yet? <a href="{% url 'account_signup' %}" class="text-danger">create one here</a>
+              </p>
+            </form>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4"></div>
+    </div>
+  </div>
+{% endblock %}
