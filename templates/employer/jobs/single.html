@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% block content %}
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-lg-3"></div>
+      <div class="col-lg-6">
+        <div class="card mt-5">
+          <div class="card-header bg-white p-3">
+            <h3 class="text-center">{{ single_job.title }}</h3>
+          </div>
+
+          <div class="text-center">{{ single_job.description }}</div>
+
+          {% if form.errors %}
+            <div class="error-summary alert alert-danger">
+              <p>Please fix the following errors:</p>
+              <ul>
+                {% for field, errors in form.errors.items %}
+                  <li>{{ field }} field is required</li>
+                {% endfor %}
+              </ul>
+            </div>
+          {% endif %}
+          <div class="card-body">
+            <form action="{% url 'employer:jobs-single' single_job.id %}" method="POST">
+              {% csrf_token %}
+              {{ form.as_p }}
+              {% if is_registered %}
+                <div class="form-group mt-3">
+                  <button type="submit" class="btn btn-block btn-danger" disabled>Apply</button>
+                </div>
+              {% else %}
+                <div class="form-group mt-3">
+                  <button type="submit" class="btn btn-block btn-danger">Apply</button>
+                </div>
+              {% endif %}
+
+              <p>
+                <a href="{% url 'employer:jobs' %}" class="text-danger">Back >>></a>
+              </p>
+            </form>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-3"></div>
+    </div>
+  </div>
+{% endblock %}

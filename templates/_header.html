@@ -21,7 +21,10 @@
                       <a href="index.html">Home</a>
                     </li>
                     <li>
-                      <a href="job_listing.html">Find a Jobs</a>
+                      <a href="{% url "employer:jobs" %}">Find a Jobs</a>
+                    </li>
+                    <li>
+                      <a href="{% url "employer:jobs-create" %}">Create</a>
                     </li>
                   </ul>
                 </nav>
